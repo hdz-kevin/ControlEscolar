@@ -28,10 +28,10 @@ CREATE TYPE user_role AS ENUM ('admin', 'teacher', 'student');
 
 CREATE TABLE users (
     id          SERIAL          PRIMARY KEY,
-    first_name  VARCHAR(100)    NOT NULL,
-    last_name   VARCHAR(100)    NOT NULL,
+    name        VARCHAR(255)    NOT NULL,
+    last_name   VARCHAR(255)    NOT NULL,
     phone       VARCHAR(20),
-    email       VARCHAR(150)    UNIQUE NOT NULL,
+    email       VARCHAR(255)    UNIQUE NOT NULL,
     password    VARCHAR(255)    NOT NULL,
     role        user_role       NOT NULL,
     created_at  TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -2,7 +2,7 @@
 
 
 ## Diagrama gráfico
-https://drawsql.app/draw?t=d7200c96-0b78-4c36-8ff4-6d14227ed82a&view=1
+https://drawsql.app/draw?t=937af9e0-f2a3-4fc5-bb2a-ae0440c88abf&view=1
 
 ---
 
@@ -22,10 +22,10 @@ Tabla base para autenticación. Los usuarios `admin`, `teacher` y `student` exti
 | Columna | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | `id` | INT | PK, AUTO_INCREMENT | Identificador único |
-| `first_name` | VARCHAR(100) | NOT NULL | Nombre(s) |
-| `last_name` | VARCHAR(100) | NOT NULL | Apellido(s) |
+| `name` | VARCHAR(255) | NOT NULL | Nombre(s) |
+| `last_name` | VARCHAR(255) | NOT NULL | Apellido(s) |
 | `phone` | VARCHAR(20) | NULLABLE | Teléfono de contacto |
-| `email` | VARCHAR(150) | UNIQUE, NOT NULL | Correo electrónico |
+| `email` | VARCHAR(255) | UNIQUE, NOT NULL | Correo electrónico |
 | `password` | VARCHAR(255) | NOT NULL | Contraseña hasheada |
 | `role` | ENUM('admin','teacher','student') | NOT NULL | Rol del usuario |
 | `created_at` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Fecha de creación |
