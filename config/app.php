@@ -123,4 +123,14 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /**
+     * The initial admin user configuration. This is used by the InitialAdminSeeder to create the first admin user in the system.
+     */
+    'initial_admin' => [
+        'name' => env('INITIAL_ADMIN_NAME', 'Admin'),
+        'last_name' => env('INITIAL_ADMIN_LAST_NAME', 'Inicial'),
+        'phone' => env('INITIAL_ADMIN_PHONE', ''),
+        'email' => env('INITIAL_ADMIN_EMAIL', 'admin@admin.com'),
+        'password' => env('INITIAL_ADMIN_PASSWORD', 'admin1234'),
+    ],
 ];
