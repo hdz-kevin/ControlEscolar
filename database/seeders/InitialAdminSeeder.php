@@ -18,10 +18,12 @@ class InitialAdminSeeder extends Seeder
 
         $user = User::query()->firstOrCreate(
             ['email' => $admin['email']],
-            $admin + [
+            array_merge($admin, [
+                'code' => $admin['code'],
+                'password' => $admin['code'],
                 'role' => UserRole::Admin,
                 'email_verified_at' => now(),
-            ]
+            ])
         );
 
         Admin::query()->firstOrCreate(['user_id' => $user->id]);

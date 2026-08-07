@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->foreignId('user_id')->primary()->constrained('users', 'id')->cascadeOnDelete();
-            $table->string('code', 20)->unique();
             $table->date('birth_date')->nullable();
             $table->timestamps();
         });

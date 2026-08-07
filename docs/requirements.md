@@ -22,6 +22,8 @@ Sistema web para la gestión académica de una universidad. Desarrollado con Lar
 - Solo el rol **Administrativo** puede crear cuentas de cualquier tipo.
 - No existe auto-registro público.
 - Al crear un usuario, se asigna su rol (admin, docente o alumno) y se crea su perfil correspondiente.
+- Al registrar un usuario, se genera una matrícula única, la cual es una combinación de letras mayúsculas y números con una longitud de 8 carácters
+- La contraseña inicial de los usuarios es la misma matrícula y es generada automáticamente
 
 ### 3.2 Inicio de sesión
 - Login con **email** y **contraseña**.
@@ -169,13 +171,13 @@ Sistema web para la gestión académica de una universidad. Desarrollado con Lar
 ## 11. Modelo de datos (DER textual)
 
 ```
-USUARIO (id, email, password_hash, rol, activo)
+USUARIO (id, nombre, apellido, matricula, telefono, email, password_hash, rol, activo)
   │
-  ├── ADMINISTRATIVO (usuario_id PK/FK, nombre, apellido, telefono)
+  ├── ADMINISTRATIVO (usuario_id PK/FK)
   │
-  ├── DOCENTE (usuario_id PK/FK, nombre, apellido, especialidad, telefono)
+  ├── DOCENTE (usuario_id PK/FK, especialidad)
   │
-  └── ALUMNO (usuario_id PK/FK, nombre, apellido, matricula, fecha_nacimiento, telefono)
+  └── ALUMNO (usuario_id PK/FK, fecha_nacimiento)
 
 CARRERA (id, clave, nombre, num_semestres)
   │

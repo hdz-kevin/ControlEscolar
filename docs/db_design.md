@@ -23,6 +23,7 @@ Tabla base para autenticación. Los usuarios `admin`, `teacher` y `student` exti
 |---|---|---|---|
 | `id` | INT | PK, AUTO_INCREMENT | Identificador único |
 | `name` | VARCHAR(255) | NOT NULL | Nombre(s) |
+| `code` | VARCHAR(8) | UNIQUE, NOT NULL | Matrícula institucional (8 caracteres alfanuméricos en mayúsculas) |
 | `last_name` | VARCHAR(255) | NOT NULL | Apellido(s) |
 | `phone` | VARCHAR(20) | NULLABLE | Teléfono de contacto |
 | `email` | VARCHAR(255) | UNIQUE, NOT NULL | Correo electrónico |
@@ -70,7 +71,6 @@ Usuarios alumnos.
 | Columna | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | `user_id` | INT | PK, FK → users(id) ON DELETE CASCADE | Referencia al usuario |
-| `code` | VARCHAR(20) | UNIQUE, NOT NULL | Matrícula institucional |
 | `birth_date` | DATE | NULLABLE | Fecha de nacimiento |
 | `created_at` | DATETIME | DEFAULT CURRENT_TIMESTAMP | |
 | `updated_at` | DATETIME | DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP | |

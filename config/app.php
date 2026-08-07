@@ -131,6 +131,6 @@ return [
         'last_name' => env('INITIAL_ADMIN_LAST_NAME', 'Inicial'),
         'phone' => env('INITIAL_ADMIN_PHONE', ''),
         'email' => env('INITIAL_ADMIN_EMAIL', 'admin@admin.com'),
-        'password' => env('INITIAL_ADMIN_PASSWORD', 'admin1234'),
+        'code' => env('INITIAL_ADMIN_CODE', 'AD000001'),
     ],
 ];

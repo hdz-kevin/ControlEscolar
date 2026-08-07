@@ -8,6 +8,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -15,6 +16,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property string $name
+ * @property string $code
  * @property string $last_name
  * @property string|null $phone
  * @property UserRole $role
@@ -28,7 +30,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'last_name', 'role', 'phone', 'email', 'password'])]
+#[Fillable(['name', 'code', 'last_name', 'role', 'phone', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -47,5 +49,29 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => UserRole::class,
         ];
+    }
+
+    /**
+     * Get the admin profile associated with the user.
+     */
+    public function adminProfile(): HasOne
+    {
+        return $this->hasOne(Admin::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the teacher profile associated with the user.
+     */
+    public function teacherProfile(): HasOne
+    {
+        return $this->hasOne(Teacher::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the student profile associated with the user.
+     */
+    public function studentProfile(): HasOne
+    {
+        return $this->hasOne(Student::class, 'user_id', 'id');
     }
 }

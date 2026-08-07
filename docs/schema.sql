@@ -29,6 +29,7 @@ CREATE TYPE user_role AS ENUM ('admin', 'teacher', 'student');
 CREATE TABLE users (
     id          SERIAL          PRIMARY KEY,
     name        VARCHAR(255)    NOT NULL,
+    code        VARCHAR(8)      UNIQUE NOT NULL,
     last_name   VARCHAR(255)    NOT NULL,
     phone       VARCHAR(20),
     email       VARCHAR(255)    UNIQUE NOT NULL,
@@ -68,7 +69,6 @@ CREATE TABLE teachers (
 CREATE TABLE students (
     user_id     INTEGER         PRIMARY KEY
                                 REFERENCES users(id) ON DELETE CASCADE,
-    code  VARCHAR(20)     UNIQUE NOT NULL,
     birth_date  DATE,
     created_at  TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at  TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP
