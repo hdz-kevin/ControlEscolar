@@ -28,8 +28,11 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        /** @var User $user */
+        $user = $this->route('user');
+
         return [
-            ...$this->profileRules($this->user()->id),
+            ...$this->profileRules($user->id),
             'last_name' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:20'],
             'specialty' => ['nullable', 'string', 'max:150'],
