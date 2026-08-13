@@ -2,20 +2,36 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Admin\CreateUser;
+use App\Actions\Admin\DeleteUser;
+use App\Actions\Admin\UpdateUser;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserStoreRequest;
+use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
 class UserController extends Controller
 {
+    public function __construct(
+        private readonly CreateUser $createUser,
+        private readonly UpdateUser $updateUser,
+        private readonly DeleteUser $deleteUser,
+    ) {}
+
     /**
      * Display a listing of users.
      */
     public function index(): InertiaResponse
     {
-        return Inertia::render('users/Index');
+        return Inertia::render('users/Index', [
+            'users' => User::query()
+                ->latest('id')
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
     }
 
     /**
@@ -29,9 +45,16 @@ class UserController extends Controller
     /**
      * Store a newly created user.
      */
-    public function store(): Response
+    public function store(UserStoreRequest $request): RedirectResponse
     {
-        abort(Response::HTTP_NOT_IMPLEMENTED);
+        $user = $this->createUser->handle($request->validated());
+
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => __('User created.'),
+        ]);
+
+        return to_route('users.edit', $user);
     }
 
     /**
@@ -47,16 +70,30 @@ class UserController extends Controller
     /**
      * Update the specified user.
      */
-    public function update(User $user): Response
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        abort(Response::HTTP_NOT_IMPLEMENTED);
+        $this->updateUser->handle($user, $request->validated());
+
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => __('User updated.'),
+        ]);
+
+        return to_route('users.edit', $user);
     }
 
     /**
      * Remove the specified user.
      */
-    public function destroy(User $user): Response
+    public function destroy(User $user): RedirectResponse
     {
-        abort(Response::HTTP_NOT_IMPLEMENTED);
+        $this->deleteUser->handle($user);
+
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => __('User deleted.'),
+        ]);
+
+        return to_route('users.index');
     }
 }
