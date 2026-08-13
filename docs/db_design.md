@@ -58,7 +58,7 @@ Usuarios docentes.
 | Columna | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | `user_id` | INT | PK, FK → users(id) ON DELETE CASCADE | Referencia al usuario |
-| `specialty` | VARCHAR(150) | NULLABLE | Área de especialización |
+| `specialty` | VARCHAR(150) | NOT NULL | Área de especialización |
 | `created_at` | DATETIME | DEFAULT CURRENT_TIMESTAMP | |
 | `updated_at` | DATETIME | DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP | |
 
