@@ -129,7 +129,7 @@ return [
     'initial_admin' => [
         'name' => env('INITIAL_ADMIN_NAME', 'Admin'),
         'last_name' => env('INITIAL_ADMIN_LAST_NAME', 'Inicial'),
-        'phone' => env('INITIAL_ADMIN_PHONE', ''),
+        'phone' => env('INITIAL_ADMIN_PHONE', NULL),
         'email' => env('INITIAL_ADMIN_EMAIL', 'admin@admin.com'),
         'code' => env('INITIAL_ADMIN_CODE', 'AD000001'),
     ],
