@@ -59,7 +59,7 @@ class UserController extends Controller
             'message' => __('User created.'),
         ]);
 
-        return to_route('users.edit', $user);
+        return to_route('users.index');
     }
 
     /**

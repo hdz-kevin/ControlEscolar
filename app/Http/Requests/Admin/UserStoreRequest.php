@@ -31,7 +31,7 @@ class UserStoreRequest extends FormRequest
         return [
             ...$this->profileRules(),
             'last_name' => ['required', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'phone' => ['nullable', 'string', 'min:10', 'max:20'],
             'role' => ['required', 'string', Rule::in(UserRole::values())],
             'specialty' => ['nullable', 'string', 'max:150'],
             'birth_date' => ['nullable', 'date'],
@@ -47,6 +47,10 @@ class UserStoreRequest extends FormRequest
     {
         $validator->sometimes('specialty', ['required', 'string', 'max:150'], function (): bool {
             return $this->input('role') === UserRole::Teacher->value;
+        });
+
+        $validator->sometimes('birth_date', ['required', 'date'], function (): bool {
+            return $this->input('role') === UserRole::Student->value;
         });
     }
 }
