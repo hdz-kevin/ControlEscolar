@@ -97,7 +97,7 @@ class UserController extends Controller
             'message' => __('User updated.'),
         ]);
 
-        return to_route('users.edit', $user);
+        return to_route('users.index');
     }
 
     /**

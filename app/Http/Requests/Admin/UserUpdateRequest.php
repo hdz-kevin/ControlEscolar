@@ -34,7 +34,7 @@ class UserUpdateRequest extends FormRequest
         return [
             ...$this->profileRules($user->id),
             'last_name' => ['nullable', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'phone' => ['nullable', 'string', 'min:10', 'max:20'],
             'specialty' => ['nullable', 'string', 'max:150'],
             'birth_date' => ['nullable', 'date'],
         ];
